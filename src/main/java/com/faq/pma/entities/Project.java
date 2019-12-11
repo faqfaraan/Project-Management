@@ -1,13 +1,14 @@
 package com.faq.pma.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Project {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long projectId;
 	
 	private String name;
@@ -32,6 +33,13 @@ public class Project {
 		this.name = name;
 		this.stage = stage;
 		this.description = description;
+	}
+
+	public void addEmployee(Employee emp) {
+		if(employees==null) {
+			employees = new ArrayList<>();
+		}
+		employees.add(emp);
 	}
 
 	public List<Employee> getEmployees() {
