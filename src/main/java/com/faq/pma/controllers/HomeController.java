@@ -2,7 +2,7 @@ package com.faq.pma.controllers;
 
 import com.faq.pma.dao.IEmployeeRepository;
 import com.faq.pma.dao.IProjectRepository;
-import com.faq.pma.entities.Employee;
+import com.faq.pma.dto.EmployeeProjectDTO;
 import com.faq.pma.entities.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +23,10 @@ public class HomeController {
     @GetMapping("/")
     public String displayHome(Model model) {
         List<Project> projects = proRepo.findAll();
-        List<Employee> employees = empRepo.findAll();
+        List<EmployeeProjectDTO> employeesProjectCount = empRepo.employeeProjects();
 
         model.addAttribute("projectList", projects);
-        model.addAttribute("employeeList", employees);
+        model.addAttribute("employeeListProjectsCount", employeesProjectCount);
 
         return "main/home";
     }
