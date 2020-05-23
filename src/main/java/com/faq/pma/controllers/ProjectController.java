@@ -1,9 +1,9 @@
 package com.faq.pma.controllers;
 
-import com.faq.pma.dao.IEmployeeRepository;
-import com.faq.pma.dao.IProjectRepository;
 import com.faq.pma.entities.Employee;
 import com.faq.pma.entities.Project;
+import com.faq.pma.services.EmployeeService;
+import com.faq.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +18,14 @@ import java.util.List;
 public class ProjectController {
 	
 	@Autowired
-	IProjectRepository proRepo;
+	ProjectService proRepo;
 
 	@Autowired
-	IEmployeeRepository empRepo;
+	EmployeeService empRepo;
 
 	@GetMapping
 	public String displayProjects(Model model) {
-		List<Project> projects = proRepo.findAll();
+		List<Project> projects = proRepo.getAll();
 		model.addAttribute("projectList", projects);
 
 		return "projects/list-projects";
@@ -35,7 +35,7 @@ public class ProjectController {
 	public String displayProjectForm(Model model) {
 		
 		Project aProject = new Project();
-		List<Employee> employees = empRepo.findAll();
+		List<Employee> employees = empRepo.getAll();
 
 		model.addAttribute("allEmployees", employees);
 		model.addAttribute("project", aProject);

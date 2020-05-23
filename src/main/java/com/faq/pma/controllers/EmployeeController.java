@@ -1,7 +1,7 @@
 package com.faq.pma.controllers;
 
-import com.faq.pma.dao.IEmployeeRepository;
 import com.faq.pma.entities.Employee;
+import com.faq.pma.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +16,11 @@ import java.util.List;
 public class EmployeeController {
 
 	@Autowired
-	IEmployeeRepository empRepo;
+	EmployeeService empRepo;
 
 	@GetMapping
 	public String displayEmployees(Model model) {
-		List<Employee> employees = empRepo.findAll();
+		List<Employee> employees = empRepo.getAll();
 		model.addAttribute("employees", employees);
 
 		return "employees/list-employees";
